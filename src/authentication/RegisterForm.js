@@ -16,14 +16,18 @@ export function RegisterForm({ onSubmit }) {
     <Form onSubmit={onSubmit}>
       <fieldset>
         <legend>Register</legend>
-        <label>
-          Email:
-          <input type="text" {...emailInput} />
-        </label>
-        <label>
-          Password:
-          <input type="password" {...passwordInput} />
-        </label>
+        <div>
+          <label>
+            Email:
+            <input type="text" {...emailInput} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Password:
+            <input type="password" {...passwordInput} />
+          </label>
+        </div>
         <button type="submit" onSubmit={onSubmit}>
           Register
         </button>

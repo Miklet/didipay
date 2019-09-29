@@ -18,38 +18,45 @@ function App({ firebase }) {
     <FirebaseProvider firebase={firebase}>
       <MiniRouter>
         <main className={styles.root}>
-          <header>
+          <header className={styles.header}>
             <h1>Did I pay?!</h1>
             <SignedOutOnly>
-              <Link to="/register">Register</Link>
-              <Link to="/login">Login</Link>
+              <div className={styles.actions}>
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+              </div>
             </SignedOutOnly>
             <SignedInOnly>
-              <Logout />
+              <div className={styles.actions}>
+                <Route path="/">
+                  <Link to="/add">Add payment</Link>
+                </Route>
+                <Logout />
+              </div>
             </SignedInOnly>
           </header>
-
-          <Route path="/register">
-            <Register />
-          </Route>
-
-          <Route path="/login">
-            <Login />
-          </Route>
-
-          <SignedInOnly>
-            <Route path="/">
-              <Link to="/add">Add payment</Link>
-              <Payments />
+          <div className={styles.container}>
+            <Route path="/register">
+              <Register />
             </Route>
-          </SignedInOnly>
 
-          <SignedInOnly>
-            <Route path="/add">
-              <Link to="/">Back to payments</Link>
-              <AddPayment />
+            <Route path="/login">
+              <Login />
             </Route>
-          </SignedInOnly>
+
+            <SignedInOnly>
+              <Route path="/">
+                <Payments />
+              </Route>
+            </SignedInOnly>
+
+            <SignedInOnly>
+              <Route path="/add">
+                <Link to="/">Back to payments</Link>
+                <AddPayment />
+              </Route>
+            </SignedInOnly>
+          </div>
         </main>
       </MiniRouter>
     </FirebaseProvider>
