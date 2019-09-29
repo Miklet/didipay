@@ -1,3 +1,4 @@
+// @ts-check
 import React from "react";
 import { FirebaseProvider } from "./firebase/FirebaseProvider";
 import { AddPayment } from "./add/AddPayment";
@@ -8,6 +9,9 @@ import { MiniRouter } from "./mini-router/MiniRouter";
 import styles from "./App.module.css";
 import { Register } from "./authentication/Register";
 import { SignedInOnly } from "./authentication/SignedInOnly";
+import { Login } from "./authentication/Login";
+import { SignedOutOnly } from "./authentication/SignedOutOnly";
+import { Logout } from "./authentication/Logout";
 
 function App({ firebase }) {
   return (
@@ -16,12 +20,21 @@ function App({ firebase }) {
         <main className={styles.root}>
           <header>
             <h1>Did I pay?!</h1>
-            <Link to="/register">Register</Link>
-            <Link to="/login">Login</Link>
+            <SignedOutOnly>
+              <Link to="/register">Register</Link>
+              <Link to="/login">Login</Link>
+            </SignedOutOnly>
+            <SignedInOnly>
+              <Logout />
+            </SignedInOnly>
           </header>
 
           <Route path="/register">
             <Register />
+          </Route>
+
+          <Route path="/login">
+            <Login />
           </Route>
 
           <SignedInOnly>

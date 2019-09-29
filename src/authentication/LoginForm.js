@@ -1,13 +1,13 @@
 import React from "react";
 import { Form } from "../form/Form";
-import { useInput } from "../add/useInput";
+import { useInput } from "../form/useInput";
 
 export function LoginForm({ onSubmit }) {
-  const emailInput = useInput();
-  const passwordInput = useInput({ type: "password" });
+  const emailInput = useInput({ name: "email" });
+  const passwordInput = useInput({ name: "password", type: "password" });
 
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <fieldset>
         <legend>Login</legend>
         <div>

@@ -1,4 +1,4 @@
-import { useInput } from "./useInput";
+import { useInput } from "../form/useInput";
 import React from "react";
 import { Form } from "../form/Form";
 

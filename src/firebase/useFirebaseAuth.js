@@ -2,16 +2,20 @@ import { useFirebase } from "./useFirebase";
 import React from "react";
 
 export function useFirebaseAuth() {
-  const [currentUser, setCurrentUser] = React.useState(null);
   const firebase = useFirebase();
+  const [currentUser, setCurrentUser] = React.useState(
+    firebase.auth().currentUser
+  );
 
   React.useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(authUser => {
       setCurrentUser(authUser);
     });
 
-    return unsubscribe;
-  });
+    return () => {
+      unsubscribe();
+    };
+  }, [firebase]);
 
   return { currentUser, isSignedIn: currentUser != null };
 }

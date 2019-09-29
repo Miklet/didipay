@@ -1,5 +1,5 @@
 import React from "react";
-import { useInput } from "../add/useInput";
+import { useInput } from "../form/useInput";
 import { Form } from "../form/Form";
 
 export function RegisterForm({ onSubmit }) {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./PaymentsTable.css";
+import styles from "./PaymentsTable.module.css";
 import { PaymentRow } from "./PaymentRow";
 
 export function PaymentsTable({ payments }) {
@@ -12,7 +12,7 @@ export function PaymentsTable({ payments }) {
   }
 
   return (
-    <table className="PaymentsTable">
+    <table className={styles.root}>
       <thead>
         <tr>
           <th>Paid</th>

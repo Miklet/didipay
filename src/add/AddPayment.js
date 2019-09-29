@@ -18,7 +18,7 @@ export function AddPayment() {
     await createPaymentMutation({
       name,
       amount,
-      date,
+      date: new Date().getTime(),
       isPaid: Boolean(isPaid)
     });
 

@@ -2,18 +2,20 @@ import React from "react";
 import { useFirebaseMutation } from "../firebase/useFirebaseMutation";
 import styles from "./PaymentRow.module.css";
 import { PaymentRemovalConfirmation } from "./PaymentRemovalConfirmation";
+import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
 
 export function PaymentRow({ id, ...payment }) {
   const [isRemoving, setIsRemoving] = React.useState(false);
+  const { currentUser } = useFirebaseAuth();
 
   const updatePaymentMutation = useFirebaseMutation({
     type: "update",
-    path: `/payments/${id}`
+    path: `/payments/${currentUser.uid}/${id}`
   });
 
   const removePaymentMutation = useFirebaseMutation({
     type: "remove",
-    path: `/payments/${id}`
+    path: `/payments/${currentUser.uid}/${id}`
   });
 
   function handleOnIsPaidChange(event) {
@@ -25,7 +27,6 @@ export function PaymentRow({ id, ...payment }) {
 
   async function handleOnRemove() {
     await removePaymentMutation();
-    setIsRemoving(false);
   }
 
   const numberFormatter = new Intl.NumberFormat("pl-PL", {
@@ -61,13 +62,12 @@ export function PaymentRow({ id, ...payment }) {
         </button>
         {isRemoving && (
           <PaymentRemovalConfirmation
+            name={payment.name}
             onConfirm={handleOnRemove}
             onCancel={() => {
               setIsRemoving(false);
             }}
-          >
-            Do you really want to remove payment "{payment.name}"?
-          </PaymentRemovalConfirmation>
+          />
         )}
       </td>
     </tr>
