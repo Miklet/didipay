@@ -3,14 +3,6 @@ import styles from "./PaymentsTable.module.css";
 import { PaymentRow } from "./PaymentRow";
 
 export function PaymentsTable({ payments }) {
-  if (!payments || payments.length === 0) {
-    return (
-      <div>
-        No payments <span aria-hidden="true">🤷‍</span>
-      </div>
-    );
-  }
-
   return (
     <table className={styles.root}>
       <thead>
@@ -23,8 +15,8 @@ export function PaymentsTable({ payments }) {
         </tr>
       </thead>
       <tbody>
-        {Object.entries(payments).map(([key, payment]) => {
-          return <PaymentRow key={key} id={key} {...payment} />;
+        {payments.map(payment => {
+          return <PaymentRow key={payment.id} {...payment} />;
         })}
       </tbody>
     </table>

@@ -4,7 +4,7 @@ import styles from "./PaymentRow.module.css";
 import { PaymentRemovalConfirmation } from "./PaymentRemovalConfirmation";
 import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
 
-export function PaymentRow({ id, ...payment }) {
+export function PaymentRow({ id, name, isPaid, amount, date }) {
   const [isRemoving, setIsRemoving] = React.useState(false);
   const { currentUser } = useFirebaseAuth();
 
@@ -20,7 +20,10 @@ export function PaymentRow({ id, ...payment }) {
 
   function handleOnIsPaidChange(event) {
     updatePaymentMutation({
-      ...payment,
+      id,
+      name,
+      amount,
+      date,
       isPaid: event.target.checked
     });
   }
@@ -42,13 +45,13 @@ export function PaymentRow({ id, ...payment }) {
       <td>
         <input
           type="checkbox"
-          checked={payment.isPaid}
+          checked={isPaid}
           onChange={handleOnIsPaidChange}
         />
       </td>
-      <td>{payment.name}</td>
-      <td>{numberFormatter.format(payment.amount)}</td>
-      <td>{dateFormatter.format(new Date(payment.date))}</td>
+      <td>{name}</td>
+      <td>{numberFormatter.format(amount)}</td>
+      <td>{dateFormatter.format(new Date(date))}</td>
       <td>
         <button
           onClick={() => {
@@ -56,13 +59,13 @@ export function PaymentRow({ id, ...payment }) {
           }}
           className={styles.removeBtn}
         >
-          <span role="img" aria-label={`Remove payment ${payment.name}`}>
+          <span role="img" aria-label={`Remove payment ${name}`}>
             ❌
           </span>
         </button>
         {isRemoving && (
           <PaymentRemovalConfirmation
-            name={payment.name}
+            name={name}
             onConfirm={handleOnRemove}
             onCancel={() => {
               setIsRemoving(false);
