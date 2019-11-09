@@ -1,15 +1,19 @@
 import React from "react";
 import { useMiniRouter } from "./MiniRouter";
 
-export function Link({ children, to, as = "a" }) {
+export function Link({ children, to, className }) {
   const { push } = useMiniRouter();
 
-  return React.createElement(as, {
-    href: to,
-    onClick: e => {
-      e.preventDefault();
-      push(to);
-    },
-    children
-  });
+  return (
+    <a
+      href={to}
+      onClick={e => {
+        e.preventDefault();
+        push(to);
+      }}
+      className={className}
+    >
+      {children}
+    </a>
+  );
 }
