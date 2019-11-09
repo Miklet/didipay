@@ -5,6 +5,7 @@ import { Button } from "./../core/Button";
 import { Stack } from "./../core/Stack";
 import { TextInput } from "../form/TextInput";
 import { Link } from "../mini-router/Link";
+import { FormLegend } from "./../form/FormLegend";
 
 export function LoginForm({ onSubmit }) {
   const emailInput = useInput({ name: "email" });
@@ -13,9 +14,7 @@ export function LoginForm({ onSubmit }) {
   return (
     <Form onSubmit={onSubmit}>
       <fieldset>
-        <legend className="text-gray-400 text-xl font-bold tracking-wider mb-4 uppercase">
-          Login
-        </legend>
+        <FormLegend>Login</FormLegend>
         <Stack spacing="large">
           <div>
             <label className="text-gray-400 block" htmlFor={emailInput.id}>

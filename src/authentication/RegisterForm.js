@@ -1,6 +1,11 @@
 import React from "react";
 import { useInput } from "../form/useInput";
 import { Form } from "../form/Form";
+import { FormLegend } from "./../form/FormLegend";
+import { Stack } from "../core/Stack";
+import { TextInput } from "./../form/TextInput";
+import { FormLabel } from "./../form/FormLabel";
+import { Button } from "./../core/Button";
 
 export function RegisterForm({ onSubmit }) {
   const emailInput = useInput({
@@ -15,22 +20,20 @@ export function RegisterForm({ onSubmit }) {
   return (
     <Form onSubmit={onSubmit}>
       <fieldset>
-        <legend>Register</legend>
-        <div>
-          <label>
-            Email:
-            <input type="text" {...emailInput} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input type="password" {...passwordInput} />
-          </label>
-        </div>
-        <button type="submit" onSubmit={onSubmit}>
+        <FormLegend>Register</FormLegend>
+        <Stack spacing="large">
+          <div>
+            <FormLabel htmlFor={emailInput.id}>Email</FormLabel>
+            <TextInput {...emailInput} />
+          </div>
+          <div>
+            <FormLabel htmlFor={passwordInput.id}>Password</FormLabel>
+            <TextInput type="password" {...passwordInput} />
+          </div>
+        </Stack>
+        <Button variant="primary" fullWidth type="submit" onSubmit={onSubmit}>
           Register
-        </button>
+        </Button>
       </fieldset>
     </Form>
   );
