@@ -2,7 +2,11 @@ import React from "react";
 import { PaymentsTable } from "./PaymentsTable";
 import { useFirebaseNode } from "../firebase/useFirebaseNode";
 import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
-import styles from "./Payments.module.css";
+import { Button } from "../core/Button";
+import { Stack } from "./../core/Stack";
+import { Link } from "../mini-router/Link";
+import { PaymentsSection } from "./PaymentsSection";
+import { PaymentsSectionHeader } from "./PaymentsSectionHeader";
 
 export function Payments() {
   const { currentUser } = useFirebaseAuth();
@@ -17,9 +21,16 @@ export function Payments() {
 
   if (!payments || payments.length === 0) {
     return (
-      <div>
-        No payments <span aria-hidden="true">🤷‍</span>
-      </div>
+      <PaymentsSection>
+        <Stack>
+          <div className="font-semibold text-center">
+            No payments <span aria-hidden="true">🤷‍</span>
+          </div>
+          <Button variant="primary" component={Link} to="/add">
+            Add payment
+          </Button>
+        </Stack>
+      </PaymentsSection>
     );
   }
 
@@ -52,36 +63,51 @@ export function Payments() {
 
   return (
     <div>
-      <section className={styles.section}>
-        <header className={styles.header}>
-          <h2>CURRENT MONTH</h2>
-          <div>
-            {numberFormatter.format(
-              paymentsFromCurrentMonth.reduce(
-                (sum, payment) => sum + Number(payment.amount),
-                0
-              )
-            )}
-          </div>
-        </header>
-        <PaymentsTable payments={paymentsFromCurrentMonth} />
-      </section>
-      {paymentsFromLastMonth.length > 0 && (
-        <section className={styles.section}>
-          <header className={styles.header}>
-            <h2>LAST MONTH</h2>
-          </header>
-          <PaymentsTable payments={paymentsFromLastMonth} />
-        </section>
-      )}
-      {olderPayments.length > 0 && (
-        <section className={styles.section}>
-          <header className={styles.header}>
-            <h2>OLDER</h2>
-          </header>
-          <PaymentsTable payments={olderPayments} />
-        </section>
-      )}
+      <Stack>
+        <PaymentsSection>
+          <PaymentsSectionHeader>
+            <h2>Current</h2>
+          </PaymentsSectionHeader>
+          {paymentsFromCurrentMonth.length > 0 ? (
+            <>
+              <div>
+                {numberFormatter.format(
+                  paymentsFromCurrentMonth.reduce(
+                    (sum, payment) => sum + Number(payment.amount),
+                    0
+                  )
+                )}
+              </div>
+              <PaymentsTable payments={paymentsFromCurrentMonth} />
+            </>
+          ) : (
+            <Stack>
+              <div className="font-semibold text-center">
+                No payments <span aria-hidden="true">🤷‍</span>
+              </div>
+              <Button variant="primary" fullWidth component={Link} to="/add">
+                Add payment
+              </Button>
+            </Stack>
+          )}
+        </PaymentsSection>
+        {paymentsFromLastMonth.length > 0 && (
+          <PaymentsSection>
+            <PaymentsSectionHeader>
+              <h2>Last month</h2>
+            </PaymentsSectionHeader>
+            <PaymentsTable payments={paymentsFromLastMonth} />
+          </PaymentsSection>
+        )}
+        {olderPayments.length > 0 && (
+          <PaymentsSection>
+            <PaymentsSectionHeader>
+              <h2>Last month</h2>
+            </PaymentsSectionHeader>
+            <PaymentsTable payments={olderPayments} />
+          </PaymentsSection>
+        )}
+      </Stack>
     </div>
   );
 }

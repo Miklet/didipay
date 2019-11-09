@@ -6,6 +6,7 @@ import { Stack } from "../core/Stack";
 import { TextInput } from "./../form/TextInput";
 import { FormLabel } from "./../form/FormLabel";
 import { Button } from "./../core/Button";
+import { FormButtons } from "../form/FormButtons";
 
 export function RegisterForm({ onSubmit }) {
   const emailInput = useInput({
@@ -31,9 +32,11 @@ export function RegisterForm({ onSubmit }) {
             <TextInput type="password" {...passwordInput} />
           </div>
         </Stack>
-        <Button variant="primary" fullWidth type="submit" onSubmit={onSubmit}>
-          Register
-        </Button>
+        <FormButtons>
+          <Button variant="primary" fullWidth type="submit" onSubmit={onSubmit}>
+            Register
+          </Button>
+        </FormButtons>
       </fieldset>
     </Form>
   );

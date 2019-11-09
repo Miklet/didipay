@@ -6,6 +6,7 @@ import { Stack } from "./../core/Stack";
 import { TextInput } from "../form/TextInput";
 import { Link } from "../mini-router/Link";
 import { FormLegend } from "./../form/FormLegend";
+import { FormButtons } from "./../form/FormButtons";
 
 export function LoginForm({ onSubmit }) {
   const emailInput = useInput({ name: "email" });
@@ -29,20 +30,22 @@ export function LoginForm({ onSubmit }) {
             <TextInput type="password" {...passwordInput} />
           </div>
         </Stack>
-        <Stack spacing="small">
-          <Button variant="primary" type="submit" fullWidth>
-            Login
-          </Button>
-          <Button
-            variant="secondary"
-            component={Link}
-            to="/register"
-            type="button"
-            fullWidth
-          >
-            Register
-          </Button>
-        </Stack>
+        <FormButtons>
+          <Stack spacing="small">
+            <Button variant="primary" type="submit" fullWidth>
+              Login
+            </Button>
+            <Button
+              variant="secondary"
+              component={Link}
+              to="/register"
+              type="button"
+              fullWidth
+            >
+              Register
+            </Button>
+          </Stack>
+        </FormButtons>
       </fieldset>
     </Form>
   );

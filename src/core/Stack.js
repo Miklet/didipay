@@ -7,6 +7,12 @@ export function Stack({ children, spacing = "medium" }) {
   return (
     <div className="flex flex-col">
       {React.Children.map(children, (child, index) => {
+        if (child == null) {
+          return null;
+        }
+
+        console.log(child);
+
         return React.cloneElement(child, {
           className: clsx(
             child.props.className,
