@@ -1,6 +1,14 @@
 import { useInput } from "../form/useInput";
 import React from "react";
 import { Form } from "../form/Form";
+import { FormLegend } from "../form/FormLegend";
+import { Stack } from "./../core/Stack";
+import { FormLabel } from "./../form/FormLabel";
+import { TextInput } from "./../form/TextInput";
+import { Button } from "./../core/Button";
+import { Checkbox } from "./../core/Checkbox";
+import { FormButtons } from "../form/FormButtons";
+import { Link } from "../mini-router/Link";
 
 export function AddPaymentForm({ onSubmit }) {
   const nameInput = useInput({
@@ -22,32 +30,39 @@ export function AddPaymentForm({ onSubmit }) {
   return (
     <Form onSubmit={onSubmit}>
       <fieldset>
-        <legend>Add payment</legend>
-        <div>
-          <label>
-            Name:
-            <input type="text" {...nameInput} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Amount:
-            <input type="number" {...amountInput} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Date:
-            <input type="date" {...dateInput} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Paid:
-            <input type="checkbox" {...isPaidCheckbox} />
-          </label>
-        </div>
-        <button type="submit">Create</button>
+        <FormLegend>Add payment</FormLegend>
+        <Stack spacing="large">
+          <div>
+            <FormLabel htmlFor={nameInput.id}>Name</FormLabel>
+            <TextInput {...nameInput} />
+          </div>
+          <div>
+            <FormLabel htmlFor={amountInput.id}>Amount</FormLabel>
+            <TextInput type="number" {...amountInput} />
+          </div>
+          <div>
+            <FormLabel htmlFor={dateInput.id}>Date</FormLabel>
+            <TextInput type="date" {...dateInput} />
+          </div>
+          <div className="flex items-center">
+            <span>
+              <FormLabel inline htmlFor={isPaidCheckbox.id}>
+                Paid
+              </FormLabel>
+            </span>
+            <Checkbox {...isPaidCheckbox} />
+          </div>
+        </Stack>
+        <FormButtons>
+          <Stack>
+            <Button variant="primary" fullWidth type="submit">
+              Create
+            </Button>
+            <Button variant="secondary" fullWidth component={Link} to="/">
+              Cancel
+            </Button>
+          </Stack>
+        </FormButtons>
       </fieldset>
     </Form>
   );

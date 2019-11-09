@@ -24,13 +24,10 @@ function App({ firebase }) {
           <Header>
             <Logo />
             <SignedInOnly>
-              <Route path="/">
-                <Link to="/add">Add payment</Link>
-              </Route>
               <Logout />
             </SignedInOnly>
           </Header>
-          <div className="container mx-auto px-6 flex flex-column flex-1">
+          <div className="container mx-auto px-6">
             <Route path="/">
               <SignedOutOnly>
                 <Redirect to="/login" />
@@ -75,7 +72,6 @@ function App({ firebase }) {
 
             <SignedInOnly>
               <Route path="/add">
-                <Link to="/">Back to payments</Link>
                 <AddPayment />
               </Route>
             </SignedInOnly>
