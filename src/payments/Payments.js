@@ -1,5 +1,4 @@
 import React from "react";
-import { PaymentsTable } from "./PaymentsTable";
 import { useFirebaseNode } from "../firebase/useFirebaseNode";
 import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
 import { Button } from "../core/Button";
@@ -7,6 +6,8 @@ import { Stack } from "./../core/Stack";
 import { Link } from "../mini-router/Link";
 import { PaymentsSection } from "./PaymentsSection";
 import { PaymentsSectionHeader } from "./PaymentsSectionHeader";
+import { IconButton } from "../core/IconButton";
+import { PaymentsList } from "./PaymentsList";
 
 export function Payments() {
   const { currentUser } = useFirebaseAuth();
@@ -41,19 +42,24 @@ export function Payments() {
 
   const currentMonth = new Date().getMonth();
 
-  const paymentsFromCurrentMonth = paymentsList.filter(
-    payment => new Date(payment.date).getMonth() === currentMonth
-  );
+  let sortByPaymentDate = (payment1, payment2) =>
+    new Date(payment1.date).getTime() < new Date(payment2.date).getTime();
 
-  const paymentsFromLastMonth = paymentsList.filter(
-    payment => new Date(payment.date).getMonth() === currentMonth - 1
-  );
+  const paymentsFromCurrentMonth = paymentsList
+    .filter(payment => new Date(payment.date).getMonth() === currentMonth)
+    .sort(sortByPaymentDate);
 
-  const olderPayments = paymentsList.filter(
-    payment =>
-      new Date(payment.date).getMonth() !== currentMonth &&
-      new Date(payment.date).getMonth() !== currentMonth - 1
-  );
+  const paymentsFromLastMonth = paymentsList
+    .filter(payment => new Date(payment.date).getMonth() === currentMonth - 1)
+    .sort(sortByPaymentDate);
+
+  const olderPayments = paymentsList
+    .filter(
+      payment =>
+        new Date(payment.date).getMonth() !== currentMonth &&
+        new Date(payment.date).getMonth() !== currentMonth - 1
+    )
+    .sort(sortByPaymentDate);
 
   const numberFormatter = new Intl.NumberFormat("pl-PL", {
     style: "currency",
@@ -63,23 +69,21 @@ export function Payments() {
 
   return (
     <div>
-      <Stack>
+      <Stack spacing="large">
         <PaymentsSection>
           <PaymentsSectionHeader>
             <h2>Current</h2>
+            <div className="font-bold">
+              {numberFormatter.format(
+                paymentsFromCurrentMonth.reduce(
+                  (sum, payment) => sum + Number(payment.amount),
+                  0
+                )
+              )}
+            </div>
           </PaymentsSectionHeader>
           {paymentsFromCurrentMonth.length > 0 ? (
-            <>
-              <div>
-                {numberFormatter.format(
-                  paymentsFromCurrentMonth.reduce(
-                    (sum, payment) => sum + Number(payment.amount),
-                    0
-                  )
-                )}
-              </div>
-              <PaymentsTable payments={paymentsFromCurrentMonth} />
-            </>
+            <PaymentsList payments={paymentsFromCurrentMonth} />
           ) : (
             <Stack>
               <div className="font-semibold text-center">
@@ -95,19 +99,44 @@ export function Payments() {
           <PaymentsSection>
             <PaymentsSectionHeader>
               <h2>Last month</h2>
+              <div className="font-bold">
+                {numberFormatter.format(
+                  paymentsFromLastMonth.reduce(
+                    (sum, payment) => sum + Number(payment.amount),
+                    0
+                  )
+                )}
+              </div>
             </PaymentsSectionHeader>
-            <PaymentsTable payments={paymentsFromLastMonth} />
+            <PaymentsList payments={paymentsFromLastMonth} />
           </PaymentsSection>
         )}
         {olderPayments.length > 0 && (
           <PaymentsSection>
             <PaymentsSectionHeader>
               <h2>Last month</h2>
+              <div className="font-bold">
+                {numberFormatter.format(
+                  olderPayments.reduce(
+                    (sum, payment) => sum + Number(payment.amount),
+                    0
+                  )
+                )}
+              </div>
             </PaymentsSectionHeader>
-            <PaymentsTable payments={olderPayments} />
+            <PaymentsList payments={olderPayments} />
           </PaymentsSection>
         )}
       </Stack>
+      <IconButton
+        component={Link}
+        to="/add"
+        style={{ bottom: "0.5rem", right: "0.5rem" }}
+      >
+        <span aria-label="Add payment" role="img">
+          ➕
+        </span>
+      </IconButton>
     </div>
   );
 }

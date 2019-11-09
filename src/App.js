@@ -27,7 +27,7 @@ function App({ firebase }) {
               <Logout />
             </SignedInOnly>
           </Header>
-          <div className="container mx-auto px-6">
+          <div className="container mx-auto px-3">
             <Route path="/">
               <SignedOutOnly>
                 <Redirect to="/login" />

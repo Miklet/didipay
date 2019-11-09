@@ -11,8 +11,6 @@ export function Stack({ children, spacing = "medium" }) {
           return null;
         }
 
-        console.log(child);
-
         return React.cloneElement(child, {
           className: clsx(
             child.props.className,

@@ -2,7 +2,7 @@ import React from "react";
 import { useMiniRouter } from "./MiniRouter";
 import clsx from "clsx";
 
-export function Link({ children, to, className }) {
+export function Link({ children, to, className, style }) {
   const { push } = useMiniRouter();
 
   return (
@@ -13,6 +13,7 @@ export function Link({ children, to, className }) {
         push(to);
       }}
       className={clsx("inline-block", className)}
+      style={style}
     >
       {children}
     </a>
