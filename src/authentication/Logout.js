@@ -1,5 +1,6 @@
 import React from "react";
 import { useFirebase } from "../firebase/useFirebase";
+import { Button } from "../core/Button";
 
 export function Logout() {
   const firebase = useFirebase();
@@ -9,8 +10,8 @@ export function Logout() {
   }
 
   return (
-    <button type="button" onClick={logout}>
+    <Button variant="secondary" onClick={logout}>
       Logout
-    </button>
+    </Button>
   );
 }
