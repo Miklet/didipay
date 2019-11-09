@@ -6,10 +6,12 @@ export function useFirebaseAuth() {
   const [currentUser, setCurrentUser] = React.useState(
     firebase.auth().currentUser
   );
+  const [isAuthVerified, setIsAuthVerified] = React.useState(false);
 
   React.useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(authUser => {
       setCurrentUser(authUser);
+      setIsAuthVerified(true);
     });
 
     return () => {
@@ -17,5 +19,5 @@ export function useFirebaseAuth() {
     };
   }, [firebase]);
 
-  return { currentUser, isSignedIn: currentUser != null };
+  return { isAuthVerified, currentUser, isSignedIn: currentUser != null };
 }

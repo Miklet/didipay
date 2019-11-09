@@ -1,7 +1,10 @@
 import React from "react";
+import { useAutoId } from "./useAutoId";
 
 export function useInput({ defaultValue = "", name, type = "text" } = {}) {
   const [value, setValue] = React.useState(defaultValue);
+  const id = useAutoId();
+
   const valueProperty =
     type === "text" || type === "password" ? "value" : "checked";
 
@@ -13,6 +16,7 @@ export function useInput({ defaultValue = "", name, type = "text" } = {}) {
   return {
     [valueProperty]: value,
     onChange,
-    name
+    name,
+    id
   };
 }

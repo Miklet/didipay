@@ -5,6 +5,7 @@ import { Payments } from "./payments/Payments";
 import { Route } from "./mini-router/Route";
 import { Link } from "./mini-router/Link";
 import { MiniRouter } from "./mini-router/MiniRouter";
+import { Redirect } from "./mini-router/Redirect";
 import { Register } from "./authentication/Register";
 import { SignedInOnly } from "./authentication/SignedInOnly";
 import { Login } from "./authentication/Login";
@@ -19,7 +20,7 @@ function App({ firebase }) {
   return (
     <FirebaseProvider firebase={firebase}>
       <MiniRouter>
-        <main className="min-h-screen bg-gray-800 max-w-6xl flex flex-col">
+        <main className="min-h-screen bg-gray-800 flex flex-col">
           <Header>
             <Logo />
             <SignedInOnly>
@@ -29,8 +30,11 @@ function App({ firebase }) {
               <Logout />
             </SignedInOnly>
           </Header>
-          <div className="px-4 flex flex-column flex-1">
+          <div className="container mx-auto px-6 flex flex-column flex-1">
             <Route path="/">
+              <SignedOutOnly>
+                <Redirect to="/login" />
+              </SignedOutOnly>
               <SignedOutOnly>
                 <div className="my-auto w-full">
                   <Stack>

@@ -14,5 +14,9 @@ export function Form({ children, onSubmit }) {
     onSubmit(formValues);
   }
 
-  return <form onSubmit={handleOnFormSubmit}>{children}</form>;
+  return (
+    <form className="container" onSubmit={handleOnFormSubmit}>
+      {children}
+    </form>
+  );
 }

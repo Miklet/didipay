@@ -1,7 +1,7 @@
 import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
 
 export function SignedOutOnly({ children }) {
-  const { isSignedIn } = useFirebaseAuth();
+  const { isSignedIn, isAuthVerified } = useFirebaseAuth();
 
-  return isSignedIn ? null : children;
+  return isAuthVerified ? (isSignedIn ? null : children) : null;
 }
