@@ -4,12 +4,10 @@ import { Stack } from "./../layout/Stack";
 
 export function PaymentsList({ payments }) {
   return (
-    <ul>
-      <Stack>
-        {payments.map(payment => {
-          return <PaymentItem {...payment} key={payment.id} />;
-        })}
-      </Stack>
-    </ul>
+    <Stack>
+      {payments.map(payment => {
+        return <PaymentItem {...payment} key={payment.id} />;
+      })}
+    </Stack>
   );
 }

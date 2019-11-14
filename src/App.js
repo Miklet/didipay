@@ -17,7 +17,7 @@ function App({ firebase }) {
   return (
     <FirebaseProvider firebase={firebase}>
       <MiniRouter>
-        <main className="min-h-screen bg-gray-800 flex flex-col">
+        <main className="min-h-screen bg-gray-900 flex flex-col">
           <Header>
             <Logo />
             <SignedInOnly>

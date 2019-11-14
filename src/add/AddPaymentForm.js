@@ -15,12 +15,16 @@ export function AddPaymentForm({ onSubmit }) {
     name: "name",
     defaultValue: process.env.NODE_ENV === "development" ? "Test" : undefined
   });
+
   const amountInput = useInput({ name: "amount", defaultValue: 0 });
+
+  const nowDate = new Date();
+
   const dateInput = useInput({
     name: "date",
-    defaultValue:
-      process.env.NODE_ENV === "development" ? "2019-09-25" : undefined
+    defaultValue: `${nowDate.getFullYear()}-${nowDate.getMonth()}-${nowDate.getDate()}`
   });
+
   const isPaidCheckbox = useInput({
     type: "checkbox",
     defaultValue: false,

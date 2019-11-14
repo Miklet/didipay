@@ -1,10 +1,5 @@
 import React from "react";
-import clsx from "clsx";
 
-export function PaymentsSection({ children, className }) {
-  return (
-    <section className={clsx("p-4 bg-gray-600 rounded-lg", className)}>
-      {children}
-    </section>
-  );
+export function PaymentsSection({ children }) {
+  return <section className="p-4 bg-gray-700 rounded">{children}</section>;
 }

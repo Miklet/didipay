@@ -41,7 +41,7 @@ export function PaymentItem({ id, name, isPaid, date, amount, className }) {
   const dateFormatter = new Intl.DateTimeFormat("pl-PL");
 
   return (
-    <li className={`flex items-center justify-between -ml-3 ${className}`}>
+    <div className="flex items-center justify-between -ml-3">
       <div className="flex items-center">
         <Checkbox checked={isPaid} onChange={handleOnIsPaidChange} />
         <div>
@@ -57,7 +57,7 @@ export function PaymentItem({ id, name, isPaid, date, amount, className }) {
           onClick={() => {
             setIsRemoving(true);
           }}
-          className=""
+          className="w-6 h-6"
         >
           <span role="img" aria-label={`Remove payment ${name}`}>
             ❌
@@ -73,6 +73,6 @@ export function PaymentItem({ id, name, isPaid, date, amount, className }) {
           }}
         />
       )}
-    </li>
+    </div>
   );
 }

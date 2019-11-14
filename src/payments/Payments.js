@@ -6,7 +6,7 @@ import { Stack } from "./../layout/Stack";
 import { Link } from "../mini-router/Link";
 import { PaymentsSection } from "./PaymentsSection";
 import { PaymentsSectionHeader } from "./PaymentsSectionHeader";
-import { IconButton } from "../core/IconButton";
+import { PaymentsSectionFooter } from "./PaymentsSectionFooter";
 import { PaymentsList } from "./PaymentsList";
 
 export function Payments() {
@@ -70,73 +70,62 @@ export function Payments() {
   return (
     <div>
       <Stack spacing="large">
-        <PaymentsSection>
+        <>
           <PaymentsSectionHeader>
             <h2>Current</h2>
-            <div className="font-bold">
-              {numberFormatter.format(
-                paymentsFromCurrentMonth.reduce(
-                  (sum, payment) => sum + Number(payment.amount),
-                  0
-                )
-              )}
-            </div>
+            <Button variant="primary" component={Link} to="/add">
+              <span className="mr-3" aria-hidden="true">
+                ➕
+              </span>
+              Add payment
+            </Button>
           </PaymentsSectionHeader>
-          {paymentsFromCurrentMonth.length > 0 ? (
-            <PaymentsList payments={paymentsFromCurrentMonth} />
-          ) : (
-            <Stack>
-              <div className="font-semibold text-center">
-                No payments <span aria-hidden="true">🤷‍</span>
-              </div>
-              <Button variant="primary" fullWidth component={Link} to="/add">
-                Add payment
-              </Button>
-            </Stack>
-          )}
-        </PaymentsSection>
-        {paymentsFromLastMonth.length > 0 && (
           <PaymentsSection>
-            <PaymentsSectionHeader>
-              <h2>Last month</h2>
-              <div className="font-bold">
+            {paymentsFromCurrentMonth.length > 0 ? (
+              <PaymentsList payments={paymentsFromCurrentMonth} />
+            ) : (
+              <Stack>
+                <div className="font-semibold text-center">
+                  No payments <span aria-hidden="true">🤷‍</span>
+                </div>
+                <Button variant="primary" fullWidth component={Link} to="/add">
+                  Add payment
+                </Button>
+              </Stack>
+            )}
+            <PaymentsSectionFooter>
+              <div className="font-bold text-right mr-8">
                 {numberFormatter.format(
-                  paymentsFromLastMonth.reduce(
+                  paymentsFromCurrentMonth.reduce(
                     (sum, payment) => sum + Number(payment.amount),
                     0
                   )
                 )}
               </div>
-            </PaymentsSectionHeader>
-            <PaymentsList payments={paymentsFromLastMonth} />
+            </PaymentsSectionFooter>
           </PaymentsSection>
+        </>
+        {paymentsFromLastMonth.length > 0 && (
+          <>
+            <PaymentsSectionHeader>
+              <h2>Last month</h2>
+            </PaymentsSectionHeader>
+            <PaymentsSection>
+              <PaymentsList payments={paymentsFromLastMonth} />
+            </PaymentsSection>
+          </>
         )}
         {olderPayments.length > 0 && (
-          <PaymentsSection>
+          <>
             <PaymentsSectionHeader>
-              <h2>Last month</h2>
-              <div className="font-bold">
-                {numberFormatter.format(
-                  olderPayments.reduce(
-                    (sum, payment) => sum + Number(payment.amount),
-                    0
-                  )
-                )}
-              </div>
+              <h2>Older</h2>
             </PaymentsSectionHeader>
-            <PaymentsList payments={olderPayments} />
-          </PaymentsSection>
+            <PaymentsSection>
+              <PaymentsList payments={olderPayments} />
+            </PaymentsSection>
+          </>
         )}
       </Stack>
-      <IconButton
-        component={Link}
-        to="/add"
-        style={{ bottom: "0.5rem", right: "0.5rem" }}
-      >
-        <span aria-label="Add payment" role="img">
-          ➕
-        </span>
-      </IconButton>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export function IconButton({
 }) {
   return (
     <Component
-      className="rounded-full bg-green-600 p-4 text-center font-semibold fixed text-black"
+      className="flex justify-center items-center rounded-full bg-green-600 h-16 w-16 font-semibold fixed text-black"
       {...restProps}
     >
       {children}

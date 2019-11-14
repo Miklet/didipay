@@ -7,6 +7,7 @@ import { TextInput } from "../form/TextInput";
 import { Link } from "../mini-router/Link";
 import { FormLegend } from "./../form/FormLegend";
 import { FormButtons } from "./../form/FormButtons";
+import { FormLabel } from "../form/FormLabel";
 
 export function LoginForm({ onSubmit }) {
   const emailInput = useInput({ name: "email" });
@@ -17,18 +18,14 @@ export function LoginForm({ onSubmit }) {
       <fieldset>
         <FormLegend>Login</FormLegend>
         <Stack spacing="large">
-          <div>
-            <label className="text-gray-400 block" htmlFor={emailInput.id}>
-              Email
-            </label>
+          <>
+            <FormLabel htmlFor={emailInput.id}>Email</FormLabel>
             <TextInput {...emailInput} />
-          </div>
-          <div>
-            <label className="text-gray-400 block" htmlFor={passwordInput.id}>
-              Password
-            </label>
+          </>
+          <>
+            <FormLabel htmlFor={passwordInput.id}>Password</FormLabel>
             <TextInput type="password" {...passwordInput} />
-          </div>
+          </>
         </Stack>
         <FormButtons>
           <Stack spacing="small">
