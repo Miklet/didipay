@@ -2,7 +2,7 @@ import React from "react";
 import { useFirebaseNode } from "../firebase/useFirebaseNode";
 import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
 import { Button } from "../core/Button";
-import { Stack } from "./../core/Stack";
+import { Stack } from "./../layout/Stack";
 import { Link } from "../mini-router/Link";
 import { PaymentsSection } from "./PaymentsSection";
 import { PaymentsSectionHeader } from "./PaymentsSectionHeader";

@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "../form/Form";
 import { useInput } from "../form/useInput";
 import { Button } from "./../core/Button";
-import { Stack } from "./../core/Stack";
+import { Stack } from "../layout/Stack";
 import { TextInput } from "../form/TextInput";
 import { Link } from "../mini-router/Link";
 import { FormLegend } from "./../form/FormLegend";

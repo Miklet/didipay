@@ -1,6 +1,6 @@
 import React from "react";
 import { PaymentItem } from "./PaymentItem";
-import { Stack } from "./../core/Stack";
+import { Stack } from "./../layout/Stack";
 
 export function PaymentsList({ payments }) {
   return (

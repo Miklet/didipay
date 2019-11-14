@@ -2,7 +2,7 @@ import React from "react";
 import { useInput } from "../form/useInput";
 import { Form } from "../form/Form";
 import { FormLegend } from "./../form/FormLegend";
-import { Stack } from "../core/Stack";
+import { Stack } from "../layout/Stack";
 import { TextInput } from "./../form/TextInput";
 import { FormLabel } from "./../form/FormLabel";
 import { Button } from "./../core/Button";
