@@ -31,24 +31,16 @@ function App({ firebase }) {
               </SignedOutOnly>
             </Route>
 
-            <Route path="/register">
-              <Register />
-            </Route>
+            <Route path="/register" component={Register} />
 
-            <Route path="/login">
-              <Login />
-            </Route>
+            <Route path="/login" component={Login} />
 
             <SignedInOnly>
-              <Route path="/">
-                <Payments />
-              </Route>
+              <Route path="/" component={Payments} />
             </SignedInOnly>
 
             <SignedInOnly>
-              <Route path="/add">
-                <AddPayment />
-              </Route>
+              <Route path="/add" component={AddPayment} />
             </SignedInOnly>
           </div>
         </main>
