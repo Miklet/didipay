@@ -3,8 +3,9 @@ import { Checkbox } from "./../core/Checkbox";
 import { useFirebaseMutation } from "./../firebase/useFirebaseMutation";
 import { useFirebaseAuth } from "./../firebase/useFirebaseAuth";
 import { PaymentRemovalConfirmation } from "./PaymentRemovalConfirmation";
+import { FiX } from "react-icons/fi";
 
-export function PaymentItem({ id, name, isPaid, date, amount, className }) {
+export function PaymentItem({ id, name, isPaid, date, amount }) {
   const [isRemoving, setIsRemoving] = React.useState(false);
   const { currentUser } = useFirebaseAuth();
 
@@ -49,7 +50,7 @@ export function PaymentItem({ id, name, isPaid, date, amount, className }) {
           <div>{dateFormatter.format(date)}</div>
         </div>
       </div>
-      <div className="font-bold">
+      <div className="font-bold flex items-center">
         <span className="inline-block mr-2">
           {numberFormatter.format(amount)}
         </span>
@@ -57,11 +58,8 @@ export function PaymentItem({ id, name, isPaid, date, amount, className }) {
           onClick={() => {
             setIsRemoving(true);
           }}
-          className="w-6 h-6"
         >
-          <span role="img" aria-label={`Remove payment ${name}`}>
-            ❌
-          </span>
+          <FiX className="text-2xl text-red-700 fill-current" aria-label={`Remove payment ${name}`} />
         </button>
       </div>
       {isRemoving && (

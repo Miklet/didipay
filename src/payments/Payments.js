@@ -8,6 +8,7 @@ import { PaymentsSection } from "./PaymentsSection";
 import { PaymentsSectionHeader } from "./PaymentsSectionHeader";
 import { PaymentsSectionFooter } from "./PaymentsSectionFooter";
 import { PaymentsList } from "./PaymentsList";
+import { FiPlusCircle } from 'react-icons/fi';
 
 export function Payments() {
   const { currentUser } = useFirebaseAuth();
@@ -73,10 +74,7 @@ export function Payments() {
         <>
           <PaymentsSectionHeader>
             <h2>Current</h2>
-            <Button variant="primary" component={Link} to="/add">
-              <span className="mr-3" aria-hidden="true">
-                ➕
-              </span>
+            <Button icon={FiPlusCircle} variant="primary" component={Link} to="/add">
               Add payment
             </Button>
           </PaymentsSectionHeader>
