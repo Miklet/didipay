@@ -1,17 +1,17 @@
-import React from "react";
-import { useFirebase } from "../firebase/useFirebase";
-import { Button } from "../core/Button";
+import React from 'react';
+import {useFirebase} from '../firebase/useFirebase';
+import {Button} from '../core/Button';
 
 export function Logout() {
-  const firebase = useFirebase();
+	const firebase = useFirebase();
 
-  function logout() {
-    firebase.auth().signOut();
-  }
+	function logout() {
+		firebase.auth().signOut();
+	}
 
-  return (
-    <Button variant="secondary" onClick={logout}>
-      Logout
-    </Button>
-  );
+	return (
+		<Button variant="secondary" onClick={logout}>
+			Logout
+		</Button>
+	);
 }

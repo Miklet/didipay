@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
-export function FormButtons({ children }) {
-  return <div className="mt-8">{children}</div>;
+export function FormButtons({children}) {
+	return <div className="mt-8">{children}</div>;
 }

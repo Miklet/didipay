@@ -1,13 +1,13 @@
-import { useFirebase } from "./useFirebase";
-import React from "react";
+import {useFirebase} from './useFirebase';
+import React from 'react';
 
 export function useFirebaseDatabase() {
-  const firebase = useFirebase();
-  const databaseRef = React.useRef(firebase.database());
+	const firebase = useFirebase();
+	const databaseRef = React.useRef(firebase.database());
 
-  React.useEffect(() => {
-    databaseRef.current = firebase.database();
-  }, [firebase]);
+	React.useEffect(() => {
+		databaseRef.current = firebase.database();
+	}, [firebase]);
 
-  return databaseRef.current;
+	return databaseRef.current;
 }

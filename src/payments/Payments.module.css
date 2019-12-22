@@ -1,9 +1,9 @@
 .section + .section {
-  margin-top: 2rem;
+	margin-top: 2rem;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

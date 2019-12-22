@@ -1,29 +1,29 @@
-import { AddPaymentForm } from "./AddPaymentForm";
-import React from "react";
-import { useFirebaseMutation } from "../firebase/useFirebaseMutation";
-import { useMiniRouter } from "../mini-router/MiniRouter";
-import { useFirebaseAuth } from "../firebase/useFirebaseAuth";
+import {AddPaymentForm} from './AddPaymentForm';
+import React from 'react';
+import {useFirebaseMutation} from '../firebase/useFirebaseMutation';
+import {useMiniRouter} from '../mini-router/MiniRouter';
+import {useFirebaseAuth} from '../firebase/useFirebaseAuth';
 
 export function AddPayment() {
-  const { currentUser } = useFirebaseAuth();
+	const {currentUser} = useFirebaseAuth();
 
-  const createPaymentMutation = useFirebaseMutation({
-    path: `/payments/${currentUser.uid}`,
-    type: "push"
-  });
+	const createPaymentMutation = useFirebaseMutation({
+		path: `/payments/${currentUser.uid}`,
+		type: 'push',
+	});
 
-  const { push } = useMiniRouter();
+	const {push} = useMiniRouter();
 
-  async function createPayment({ name, amount, date, isPaid }) {
-    await createPaymentMutation({
-      name,
-      amount,
-      date: new Date(date).getTime(),
-      isPaid: Boolean(isPaid)
-    });
+	async function createPayment({name, amount, date, isPaid}) {
+		await createPaymentMutation({
+			name,
+			amount,
+			date: new Date(date).getTime(),
+			isPaid: Boolean(isPaid),
+		});
 
-    push("/");
-  }
+		push('/');
+	}
 
-  return <AddPaymentForm onSubmit={createPayment} />;
+	return <AddPaymentForm onSubmit={createPayment} />;
 }

@@ -1,12 +1,12 @@
-import React from "react";
-import { useMiniRouter } from "./MiniRouter";
+import React from 'react';
+import {useMiniRouter} from './MiniRouter';
 
-export function Redirect({ to }) {
-  const { push } = useMiniRouter();
+export function Redirect({to}) {
+	const {push} = useMiniRouter();
 
-  React.useEffect(() => {
-    push(to);
-  }, [push, to]);
+	React.useEffect(() => {
+		push(to);
+	}, [push, to]);
 
-  return null;
+	return null;
 }
